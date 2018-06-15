@@ -24,11 +24,7 @@
                         ,@body)))))
 
 (defcommand :open (path &rest keys &key &allow-other-keys)
-  (let ((fid (loop
-                for i from 0
-                for entry across *file-table*
-                do (when (eql entry nil)
-                     (return i)))))
+  (let ((fid (position nil *file-table*)))
     (format t "Keys ~S~%" keys)
     (unless fid
       (error 'error-with-class
